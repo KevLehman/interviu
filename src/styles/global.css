@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;1,400;1,600;1,800&family=Roboto:wght@400;500;700&display=swap');
+
+hr {
+  border-width: 2px;
+}
+
+h1, h2, h3 {
+  font-family: 'Bree Serif'
+}
+
+.badge {
+  @apply rounded-full ml-2 mt-2 uppercase text-base px-2 self-center font-semibold
+}
+
+@screen md {
+  .badge {
+    @apply mt-0;
+  }
+}
+
+@screen lg {
+  .badge {
+    @apply mt-0;
+  }
+}

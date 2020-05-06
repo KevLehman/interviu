@@ -1,0 +1,62 @@
+{
+  "junior": [
+    {
+      "question": "What's the difference between Javascript & Node JS? ",
+      "answer": "Javascript is a interpreted programming language designed to be run in browsers. Node is a platform that was made with the intention of being able to run JS code in the server, providing a set of tools to deal with files & interact with the filesystem"
+    },
+    {
+      "question": "What's Node.JS latest version?",
+      "answer": "Current Node latest version is XX.XX"
+    }, 
+    {
+      "question": "What's Node.JS latest LTS version?",
+      "answer": "Current Node latest LTS version is XX.XX"
+    },
+    {
+      "question": "What's Node.JS?",
+      "answer": "Node.JS is a platform built on Google's V8 engine that allows developers to run Javascript code in the backend."
+    },
+    {
+      "question": "For what type of applications is Node.JS a good fit?",
+      "answer": "Node.JS is a good fit for every kind of application, avoiding the ones that perform CPU intensive operations or calculations, like graphic engines or Mathematic operations"
+    },
+    {
+      "question": "What's NPM? What's the difference between it an Yarn?",
+      "answer": "NPM is the Node Package Manager, that holds all the prebuilt packages that are maintained by the Node community. NPM is also the name of the tool in charge to download that packages into our repositories. Yarn does the same, with the difference that yarn is a bit faster"
+    },
+    {
+      "question": "How are dependencies managed in Node.JS?",
+      "answer": "Node's dependencies are managed with a file called Package.json. Then, we can use any of the tools available (Yarn or NPM) to download them from NPM.org, the place where all the packages are stored"
+    },
+    {
+      "question": "What's package.json?",
+      "answer": "The package.json is the file that holds all the information about our project. This file contains the dependencies, development deps, author & license information, predefined scripts and many more"
+    },
+    {
+      "question": "What's the difference between `dependencies` and `devDependencies`?",
+      "answer": "Dependencies are the packages our code uses to run, devDependencies are packages that are used during the development life-cycle but are not needed when the code is deployed to production. An example is the Typescript dep, which isn't used in production since the code is transpiled into JS first"
+    },
+    {
+      "question": "Mention 3 ways to write async code",
+      "answer": "Using callbacks, promises & async/await"
+    },
+    {
+      "question": "What contains the `global` object in node? Is it the same as the browser's `window` object?",
+      "answer": "Both contain global functions that should be available to all our application, the difference is that the window object contains data about browser apis, like the DOM access functions. Node's global has module related data"
+    },
+    {
+      "question": "What's semantic versioning?",
+      "answer": "Semantic versioning is a standard that sets the way a package should be versioned and how the modifications should be reflected. It consists of 3 numbers separated by dots: X.X.X (Major.Minor.Patch)"
+    },
+    {
+      "question": "For what's semantic versioning useful?",
+      "answer": "It makes easier to identify if a change in a dependency contains big changes that could affect our code"
+    },
+    {
+      "question": "How's Node.JS code organized?",
+      "answer": "Some answer should be here"
+    }
+  ],
+  "medium": [],
+  "senior": []
+}
