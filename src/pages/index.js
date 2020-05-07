@@ -22,14 +22,14 @@ const IndexPage = () => {
       </p>
       <div className="w-full h-auto mb-6 flex items-baseline flex-row flex-wrap">
         {currentTechnologies.map(lang => (
-          <div
+          <button
             className={`badge bg-green-200 ${
               tech === lang ? "bg-green-800 text-white" : "text-green-800"
             }`}
             onClick={() => setTech(lang)}
           >
             {lang}
-          </div>
+          </button>
         ))}
       </div>
       <h3 className="mt-8 text-xl">2. Select the level of the questions</h3>
@@ -41,14 +41,14 @@ const IndexPage = () => {
       </p>
       <div className="w-full h-auto mb-6 flex items-baseline flex-row flex-wrap">
         {levels.map(sLevel => (
-          <div
+          <button
             className={`badge bg-red-200 ${
               level === sLevel ? "bg-red-800 text-white" : "text-red-800"
             }`}
             onClick={() => setLevel(sLevel)}
           >
             {sLevel}
-          </div>
+          </button>
         ))}
       </div>
       <h3 className=" mt-8 text-xl">3. Optionally, enable Interview Mode</h3>
@@ -58,12 +58,12 @@ const IndexPage = () => {
         be for that level
       </p>
       <div className="w-full h-auto mb-6 flex items-baseline flex-row flex-wrap">
-        <div
+        <button
           className={`badge bg-blue-200 ${
             interv ? "bg-blue-800 text-white" : "text-blue-800"
           }`}
           onClick={() => setInterv(!interv)}
-        >{`${interv}`}</div>
+        >{`${interv}`}</button>
       </div>
       <QuestionWrapper tech={tech} level={level} isInterview={interv} />
     </Layout>
