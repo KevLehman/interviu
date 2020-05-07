@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `Interview Questions`,
@@ -28,6 +32,24 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: "gatsby-plugin-firebase",
+      options: {
+        credentials: {
+          apiKey: process.env.GATSBY_API_KEY,
+          authDomain: process.env.GATSBY_AUTH_DOMAIN,
+          databaseURL: process.env.GATSBY_DB_URL,
+          projectId: process.env.GATSBY_PROJECT_ID,
+          storageBucket: process.env.GATSBY_STORAGE_BUCKET,
+          messagingSenderId: process.env.GATSBY_MESSAGE_SENDER_ID,
+          appId: process.env.GATSBY_APP_ID
+        },
+        features: {
+          database: true,
+          firebase: true,
+        }
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

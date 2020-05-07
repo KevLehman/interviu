@@ -1,17 +1,72 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import firebase from 'gatsby-plugin-firebase';
 import QuestionWrapper from '../components/question-wrapper';
-import Questions from '../questions';
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const currentTechnologies = Object.keys(Questions);
-const levels = ['junior', 'medium', 'senior', 'all'];
+function mergeQuestions(jsonQuestions = {}) {
+  return Object.keys(jsonQuestions).reduce((all, current) => {
+    return [...all, ...jsonQuestions[current]]
+  }, []);
+}
+
+function prepareInterview(questions = [], limit = 20) {
+  const maxQuestions = limit > questions.length ? questions.length : limit;
+  return [...questions].sort(() => .5 - Math.random()).slice(0, maxQuestions);
+}
 
 const IndexPage = () => {
+  const levels = ['junior', 'medium', 'senior', 'all'];
+
   const [tech, setTech] = useState('node');
   const [level, setLevel] = useState('all');
   const [interv, setInterv] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [technologies, setTechnologies] = useState([]);
+
+/*   useEffect(() => { // store data in a collection
+    const questionCollection = firebase
+      .firestore()
+      .collection('questions')
+      
+    Object.keys(Questions)
+      .map(key => {
+        questionCollection
+          .doc(key)
+          .set(Questions[key]);
+      })
+  }) */
+
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection('questions')
+      .get()
+      .then(values => {
+        const dbTechnologies = new Set()
+        values.forEach(value => {
+          dbTechnologies.add(value.id)
+        })
+
+        setTechnologies([...dbTechnologies]);
+      })
+  }, [])
+
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection(`questions`)
+      .doc(tech)
+      .get()
+      .then(value => {
+        const dbQuestions = value.data();
+        const techQuestions = level !== 'all' ? dbQuestions[level] : mergeQuestions(dbQuestions);
+        setQuestions(techQuestions);
+      });
+    }, [tech, level]);
+
+    // let  techQuestions = level !== 'all' ? questions[level] : mergeQuestions(questions)
 
   return (
     <Layout>
@@ -19,7 +74,7 @@ const IndexPage = () => {
     <h3 className="mt-8 text-xl">1. Select a technology from the list</h3>
     <p className="text-xs text-gray-800 mb-8">Technology instead of language to keep the tool open to extensions</p>
     <div className="w-full h-auto mb-6 flex items-baseline flex-row flex-wrap">
-      {currentTechnologies.map(lang => (
+      {technologies.map(lang => (
         <div className={`badge bg-green-200 ${tech === lang ? 'bg-green-800 text-white' : 'text-green-800'}`} onClick={() => setTech(lang)}>{lang}</div>
       ))}
     </div>
@@ -35,7 +90,7 @@ const IndexPage = () => {
     <div className="w-full h-auto mb-6 flex items-baseline flex-row flex-wrap">
       <div className={`badge bg-blue-200 ${interv ? 'bg-blue-800 text-white' : 'text-blue-800' }`} onClick={() => setInterv(!interv)}>{`${interv}`}</div>
     </div>
-    <QuestionWrapper tech={tech} level={level} isInterview={interv} />
+    <QuestionWrapper tech={tech} level={level} questions={interv ? prepareInterview(questions) : questions} />
   </Layout>
   )
 }
