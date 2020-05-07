@@ -29,7 +29,7 @@ export default ({ tech, level, isInterview = false }) => {
       </n3>
       <div className="border-b-2 mt-3 mb-3"></div>
       {(questions || []).map(({ question, answer }, idx) => (
-        <div className="mt-3 mb-3">
+        <div key={idx} className="mt-3 mb-3">
           <h6 className="text-lg text-black mb-3 font-questions">{`${
             idx + 1
           }. ${question}`}</h6>

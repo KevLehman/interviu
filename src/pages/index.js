@@ -21,8 +21,9 @@ const IndexPage = () => {
         Technology instead of language to keep the tool open to extensions
       </p>
       <div className="w-full h-auto mb-6 flex items-baseline flex-row flex-wrap">
-        {currentTechnologies.map(lang => (
+        {currentTechnologies.map((lang, index) => (
           <button
+            key={`${lang}-${index}`}
             className={`badge bg-green-200 ${
               tech === lang ? "bg-green-800 text-white" : "text-green-800"
             }`}
@@ -40,8 +41,9 @@ const IndexPage = () => {
         its current level
       </p>
       <div className="w-full h-auto mb-6 flex items-baseline flex-row flex-wrap">
-        {levels.map(sLevel => (
+        {levels.map((sLevel, index) => (
           <button
+            key={`${sLevel}-${index}`}
             className={`badge bg-red-200 ${
               level === sLevel ? "bg-red-800 text-white" : "text-red-800"
             }`}
