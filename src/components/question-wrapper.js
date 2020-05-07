@@ -23,10 +23,11 @@ export default ({ tech, level, isInterview = false }) => {
 
   return (
     <div className="w-full border-2 border-solid p-6 mt-10 mb-10">
-      <n3 className="text-xl font-semibold text-header">
-        Showing questions for <span className="uppercase">{tech}</span> designed
-        for <span className="uppercase">{level}</span> devs
-      </n3>
+      <h3 className="text-xl font-semibold text-header">
+        Showing questions for{" "}
+        <span className="uppercase underline">{tech}</span> designed for{" "}
+        <span className="uppercase underline">{level}</span> devs
+      </h3>
       <div className="border-b-2 mt-3 mb-3"></div>
       {(questions || []).map(({ question, answer }, idx) => (
         <div key={idx} className="mt-3 mb-3">
