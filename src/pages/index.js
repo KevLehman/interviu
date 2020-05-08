@@ -126,7 +126,8 @@ const IndexPage = () => {
       <QuestionWrapper
         tech={tech}
         level={level}
-        questions={interv ? prepareInterview(questions) : questions}
+        interviewMode={interv}
+        questions={ interv ? prepareInterview(questions) : questions }
       />
     </Layout>
   )
