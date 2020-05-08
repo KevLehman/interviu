@@ -1,26 +1,6 @@
-import React from "react"
-import Questions from "../questions"
+import React, { useState, useEffect } from "react"
 
-function mergeQuestions(jsonQuestions = {}) {
-  return Object.keys(jsonQuestions).reduce((all, current) => {
-    return all.push(...jsonQuestions[current]) && all
-  }, [])
-}
-
-function prepareInterview(questions = [], limit = 20) {
-  const maxQuestions = limit > questions.length ? questions.length : limit
-  return [...questions].sort(() => 0.5 - Math.random()).slice(0, maxQuestions)
-}
-
-export default ({ tech, level, isInterview = false }) => {
-  const questionFile = Questions[tech.toLowerCase()] || {}
-  let questions =
-    level !== "all" ? questionFile[level] : mergeQuestions(questionFile)
-
-  if (isInterview) {
-    questions = prepareInterview(questions)
-  }
-
+export default ({ tech, level, questions = [] }) => {
   return (
     <div className="w-full border-2 border-solid p-6 mt-10 mb-10">
       <h3 className="text-xl font-semibold text-header">
