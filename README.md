@@ -11,34 +11,28 @@
 
 ### How to add more questions?
 
-Questions are JSON files stored in `src/questions`. Each file should have the name of the technology (in lowercase, preferably).
+Questions are stored in a Firebase FireStore collection called `questions`. You can create your own and add questions there. There's still a pending work to enable you to add questions through the UI
 
-#### Structure of a JSON Question file
+#### Structure of Questions collection
 
 ```json
-{
-  "level": [
-    {
-      "question": "blablabla",
-      "answer": "blablabla"
-    }
-  ]
+{ "tech": 
+  {
+    "level": [
+      {
+        "question": "blablabla",
+        "answer": "blablabla"
+      }
+    ]
+  }
 }
 ```
+
+The `tech` key is the `id` for the firebase document. This should be written in lowercase to avoid issues. 
 
 The key `level` can be any value of `junior` `medium` or `senior`. No key needed for `all` levels.
 
-After creating the file, you should make it `available` for the app to use by requiring it in the `index.js` file of `/questions`.
-
-#### Structure of `index.js` file
-
-```js
-module.exports = {
-  [techName]: require("./file.json"),
-}
-```
-
-Where `techName` should be replaced with the `lowercased` version of the tech name. Technologies with `spaces` in its name can be saved using quotes.
+After creating the question list, just refresh the page and they should be there!
 
 ### How to contribute
 
@@ -48,7 +42,11 @@ Where `techName` should be replaced with the `lowercased` version of the tech na
    npm install -g gatsby-cli
    ```
 
-2. **Fork and clone this projects.**
+2. **Fork and clone this project.**
+
+3. **Copy `.env.example` to `.env`**
+
+4. **Set the environment variables to your own Firebase API keys**
 
 3. **Start the site in `develop` mode.**
 
