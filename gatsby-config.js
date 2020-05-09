@@ -4,7 +4,7 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Interview Questions`,
+    title: `InterviU`,
     description: `Repository to host interview questions from multiple technologies based on seniority levels. For internal use only`,
     author: `@kaleman`,
   },
