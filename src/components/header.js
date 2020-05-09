@@ -15,18 +15,26 @@ const Header = ({ siteTitle }) => (
         maxWidth: 960,
         padding: `1.45rem 1.0875rem`,
       }}
+      className="flex flex-row justify-between "
     >
-      <h1 style={{ margin: 0 }} className="text-4xl">
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
+      <div className="flex flex-col self-center">
+        <h1 className="text-5xl leading-none">
+          <Link
+            to="/"
+            style={{
+              color: `white`,
+              textDecoration: `none`,
+            }}
+          >
+            {siteTitle}
+          </Link>
+        </h1>
+        <p className="text-xs text-white text-questions">A single place for all your questions</p>
+      </div>
+      <div className="flex flex-col self-center">
+        <div className="bg-green-600 inline-block rounded-t text-white font-semibold text-lg"><Link to="/">Questions</Link></div>
+        <div className="bg-green-600 inline-block rounded-t text-white font-semibold text-lg"><Link to="/reporting">Reporting</Link></div>
+      </div>
     </div>
   </header>
 )
