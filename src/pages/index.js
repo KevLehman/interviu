@@ -16,6 +16,10 @@ function prepareInterview(questions = [], limit = 20) {
   return [...questions].sort(() => 0.5 - Math.random()).slice(0, maxQuestions)
 }
 
+function filterScreeningQuesitons(questions) {
+  return questions.filter(q => q.screening)
+}
+
 const IndexPage = () => {
   const levels = ["junior", "medium", "senior", "all"]
 
@@ -68,7 +72,10 @@ const IndexPage = () => {
       })
   }, [tech, level])
 
-  // let  techQuestions = level !== 'all' ? questions[level] : mergeQuestions(questions)
+  let techQuestions = interv ? prepareInterview(questions) : questions
+  techQuestions = screening
+    ? filterScreeningQuesitons(techQuestions)
+    : techQuestions
 
   return (
     <Layout>
@@ -122,20 +129,24 @@ const IndexPage = () => {
             interv ? "bg-blue-800 text-white" : "text-blue-800"
           }`}
           onClick={() => setInterv(!interv)}
-        >{interv ? 'Interviewing' : 'No interview' }</button>
+        >
+          {interv ? "Interviewing" : "No interview"}
+        </button>
         <button
           className={`badge bg-blue-200 ${
             screening ? "bg-blue-800 text-white" : "text-blue-800"
           }`}
           onClick={() => setScreening(!screening)}
-        >{screening ? 'Screening' : 'No screening' }</button>
+        >
+          {screening ? "Screening" : "No screening"}
+        </button>
       </div>
       <QuestionWrapper
         tech={tech}
         level={level}
         interviewMode={interv}
         screeningMode={screening}
-        questions={ interv ? prepareInterview(questions) : questions }
+        questions={techQuestions}
       />
     </Layout>
   )
