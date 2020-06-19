@@ -79,9 +79,9 @@ export default () => {
 
       candidateObject[email] = {
         ...candidateObject[email],
+        fullName,
         [isScreening ? 'screening' : 'interview']: tempObj,
       };
-
       return null;
     });
 
@@ -101,7 +101,7 @@ export default () => {
                 onClick={(event) => setSelectedCandidate(event.target.id)}
                 className="text-answers text-center leading-loose"
               >
-                {candidate}
+                {`${canditeInfo[candidate].fullName} (${candidate})`}
               </h3>
               <div className="border mb-2" />
             </div>
@@ -110,49 +110,50 @@ export default () => {
         <div className="w-full mt-10 md:mt-0 lg:mt-0 md:w-3/5 lg:w-3/5">
           <h1 className="text-2xl text-center">Answers</h1>
           {selectedCandidate
-            && Object.keys(canditeInfo[selectedCandidate] || {}).map((mode) => {
-              const currentCandidateMode = canditeInfo[selectedCandidate][mode];
-              return (
-                <div className="mb-2">
-                  <h2 className="text-xl">
-                    {mode}
-                    {' '}
-                    -
-                    {currentCandidateMode.tech}
-                    {' '}
-                    -
-                    {' '}
-                    {candidateApproved(currentCandidateMode.answers)}
-                  </h2>
-                  <p>
-                    Interviewer
-                    {' '}
-                    {currentCandidateMode.notes.interviewer}
-                    {' '}
-                    @
-                    {' '}
-                    {currentCandidateMode.notes.interviewedAt}
-                  </p>
-                  <div className="border mb-5" />
-                  {Object.keys(currentCandidateMode.answers).map((answer) => (
-                    <div className="mb-3">
-                      <p className="text-lg">{currentCandidateMode.answers[answer].question}</p>
-                      <p className="text-gray-800">
-                        <span className="text-black underline">Overall: </span>
-                        {currentCandidateMode.answers[answer].evaluatedScore}
-                      </p>
-                      <p className="text-gray-800">
-                        <span className="text-black underline">Additional information: </span>
-                        {currentCandidateMode.answers[answer].performance}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              );
-            })}
+            && Object.keys(canditeInfo[selectedCandidate] || {})
+              .filter((e) => e !== 'fullName')
+              .map((mode) => {
+                const currentCandidateMode = canditeInfo[selectedCandidate][mode];
+                return (
+                  <div className="mb-2">
+                    <h2 className="text-xl">
+                      {mode}
+                      {' '}
+                      -
+                      {currentCandidateMode.tech}
+                      {' '}
+                      -
+                      {' '}
+                      {candidateApproved(currentCandidateMode.answers)}
+                    </h2>
+                    <p>
+                      Interviewer
+                      {' '}
+                      {currentCandidateMode.notes.interviewer}
+                      {' '}
+                      @
+                      {' '}
+                      {currentCandidateMode.notes.interviewedAt}
+                    </p>
+                    <div className="border mb-5" />
+                    {Object.keys(currentCandidateMode.answers).map((answer) => (
+                      <div className="mb-3">
+                        <p className="text-lg">{currentCandidateMode.answers[answer].question}</p>
+                        <p className="text-gray-800">
+                          <span className="text-black underline">Overall: </span>
+                          {currentCandidateMode.answers[answer].evaluatedScore}
+                        </p>
+                        <p className="text-gray-800">
+                          <span className="text-black underline">Additional information: </span>
+                          {currentCandidateMode.answers[answer].performance}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })}
         </div>
       </div>
-      <p>{console.log(canditeInfo[selectedCandidate])}</p>
     </Layout>
   );
 };

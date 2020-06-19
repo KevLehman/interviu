@@ -23,9 +23,8 @@ function filterScreeningQuesitons(questions) {
 }
 
 const IndexPage = () => {
-  const levels = ['junior', 'medium', 'senior', 'all'];
-
   const [tech, setTech] = useState('node');
+  const [levels, setLevels] = useState(['junior', 'medium', 'senior', 'all']);
   const [level, setLevel] = useState('all');
   const [interv, setInterv] = useState(false);
   const [questions, setQuestions] = useState([]);
@@ -67,8 +66,13 @@ const IndexPage = () => {
       .doc(tech)
       .get()
       .then((value) => {
+        const lvs = new Set();
         const dbQuestions = value.data();
+        const keys = Object.keys(dbQuestions);
+        keys.map((k) => lvs.add(k));
         const techQuestions = level !== 'all' ? dbQuestions[level] : mergeQuestions(dbQuestions);
+
+        setLevels([...[...lvs].sort(), 'all']);
         setQuestions(techQuestions);
       });
   }, [tech, level]);
@@ -99,9 +103,10 @@ const IndexPage = () => {
       </div>
       <h3 className="mt-4 text-xl">2. Select the level of the questions</h3>
       <p className="text-xs text-gray-800 mb-4">
-        We use the 3 base levels: Junior, Mid and Senior levels. Additionally, you can select
-        &apos;ALL&apos; that will show questions for all levels. This is useful if you want to
-        interview a developer and you&apos;re not sure about its current level
+        We use the 3 base levels: Junior, Mid and Senior levels. However, for some techs, they are
+        generated from the question info. Additionally, you can select &apos;ALL&apos; that will
+        show questions for all levels. This is useful if you want to interview a developer and
+        you&apos;re not sure about its current level
       </p>
       <div className="w-full h-auto mb-4 flex items-baseline flex-row flex-wrap">
         {levels.map((sLevel) => (

@@ -8,6 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
+import { transitions, positions, Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
 
 import Header from './header';
 import './layout.css';
@@ -23,8 +25,15 @@ const Layout = ({ children }) => {
     }
   `);
 
+  const options = {
+    position: positions.BOTTOM_CENTER,
+    timeout: 3000,
+    offset: '30px',
+    transition: transitions.FADE,
+  };
+
   return (
-    <>
+    <AlertProvider template={AlertTemplate} {...options}>
       <Header siteTitle={data.site.siteMetadata.title} />
       <div
         style={{
@@ -43,7 +52,7 @@ const Layout = ({ children }) => {
           <a href="https://twitter.com/kaleman15">@kaleman</a>
         </footer>
       </div>
-    </>
+    </AlertProvider>
   );
 };
 
