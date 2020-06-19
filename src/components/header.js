@@ -1,19 +1,19 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      marginBottom: `1.45rem`,
+      marginBottom: '1.45rem',
     }}
     className="bg-green-600"
   >
     <div
       style={{
-        margin: `0 auto`,
+        margin: '0 auto',
         maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
+        padding: '1.45rem 1.0875rem',
       }}
       className="flex flex-row justify-between "
     >
@@ -22,8 +22,8 @@ const Header = ({ siteTitle }) => (
           <Link
             to="/"
             style={{
-              color: `white`,
-              textDecoration: `none`,
+              color: 'white',
+              textDecoration: 'none',
             }}
           >
             {siteTitle}
@@ -32,19 +32,23 @@ const Header = ({ siteTitle }) => (
         <p className="text-xs text-white text-questions">A single place for all your questions</p>
       </div>
       <div className="flex flex-col self-center">
-        <div className="bg-green-600 inline-block rounded-t text-white font-semibold text-lg"><Link to="/">Questions</Link></div>
-        <div className="bg-green-600 inline-block rounded-t text-white font-semibold text-lg"><Link to="/reporting">Reporting</Link></div>
+        <div className="bg-green-600 inline-block rounded-t text-white font-semibold text-lg">
+          <Link to="/">Questions</Link>
+        </div>
+        <div className="bg-green-600 inline-block rounded-t text-white font-semibold text-lg">
+          <Link to="/reporting">Reporting</Link>
+        </div>
       </div>
     </div>
   </header>
-)
+);
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-}
+};
 
 Header.defaultProps = {
-  siteTitle: ``,
-}
+  siteTitle: '',
+};
 
-export default Header
+export default Header;
